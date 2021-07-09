@@ -76,7 +76,7 @@
             android:id="@+id/profile_name"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginTop="108dp"
+            android:layout_marginTop="104dp"
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
@@ -93,19 +93,18 @@
 
         <TextView
             android:id="@+id/profile_brief"
-            android:layout_width="411dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginTop="16dp"
             android:ellipsize="end"
             android:fontFamily="sans-serif-condensed"
+            android:gravity="center"
             android:maxLines="2"
             android:paddingStart="@dimen/grid_3x"
             android:paddingEnd="@dimen/grid_3x"
             android:textColor="@color/white"
             android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/image_rel_layout"
+            app:layout_constraintStart_toStartOf="@id/profile_name"
             app:layout_constraintTop_toBottomOf="@+id/profile_name" />
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -118,7 +117,6 @@
             app:civ_border_width="0.5dp"
             app:civ_circle_background_color="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/image_rel_layout"
-
             app:layout_constraintTop_toBottomOf="@+id/profile_brief"
             app:layout_constraintVertical_bias="0.0"
             tools:layout_editor_absoluteX="210dp" />
@@ -146,15 +144,14 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/interestChipRecyclerView"
-            android:layout_width="290dp"
-            android:layout_height="111dp"
+            android:layout_width="257dp"
+            android:layout_height="57dp"
             android:layout_marginStart="@dimen/grid_3x"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="@dimen/grid_3x"
             android:paddingTop="@dimen/grid_1x"
             android:paddingBottom="@dimen/grid_1x"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.606"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView14"
             tools:listitem="@layout/interest_chip_item" />
@@ -171,8 +168,9 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="96dp"
+            android:layout_height="95dp"
+            android:layout_marginStart="164dp"
             android:paddingStart="@dimen/grid_2x"
             android:paddingEnd="@dimen/grid_2x"
             android:src="@drawable/ic_baseline_person_24"
@@ -180,8 +178,8 @@
             app:civ_border_width="1dp"
             app:civ_circle_background_color="@color/main_background"
             app:layout_constraintBaseline_toTopOf="@id/profile_name"
-            tools:layout_editor_absoluteX="162dp"
-            tools:layout_editor_absoluteY="24dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="4dp" />
 
         <ImageView
             android:id="@+id/btn_edit_profile"
