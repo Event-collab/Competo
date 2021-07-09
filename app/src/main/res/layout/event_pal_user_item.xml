@@ -35,8 +35,8 @@
 
                 <Button
                     android:id="@+id/btnSendMessage"
-                    android:layout_width="350dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="296dp"
+                    android:layout_height="47dp"
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/eventpal_button_round"
                     android:text="Message Request"
@@ -108,8 +108,8 @@
                     android:paddingTop="@dimen/grid_2x"
                     android:src="@drawable/ic_upperarrow"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:layout_editor_absoluteX="165dp"
-                    tools:ignore="MissingConstraints" />
+                    tools:ignore="MissingConstraints"
+                    tools:layout_editor_absoluteX="165dp" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </FrameLayout>
