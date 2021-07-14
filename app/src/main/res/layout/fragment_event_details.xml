@@ -182,12 +182,12 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView3"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="350dp"
+        android:layout_height="200dp"
         android:layout_marginStart="@dimen/grid_3x"
         android:layout_marginTop="45dp"
         android:layout_marginEnd="@dimen/grid_3x"
-        app:cardCornerRadius="20dp"
+        app:cardCornerRadius="10dp"
         app:cardElevation="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -195,8 +195,8 @@
 
         <ImageView
             android:id="@+id/ivImage"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="350dp"
+            android:layout_height="200dp"
             android:scaleType="centerCrop"
             tools:src="@drawable/city" />
     </androidx.cardview.widget.CardView>
