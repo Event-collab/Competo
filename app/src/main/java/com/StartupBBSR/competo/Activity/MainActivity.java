@@ -6,7 +6,6 @@ import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -22,7 +21,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.StartupBBSR.competo.Firebasemessaging.MyFirebaseMessagingService;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
+
 import com.StartupBBSR.competo.Fragments.FindFragment;
 import com.StartupBBSR.competo.Fragments.HomeFragment;
 import com.StartupBBSR.competo.Fragments.ProfileFragment;
@@ -45,18 +52,9 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.messaging.FirebaseMessaging;
-import com.google.firebase.messaging.FirebaseMessagingService;
 
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 import jp.wasabeef.glide.transformations.BlurTransformation;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -115,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ///////////////////////////////////////////////////////////////////
         //alarm manager implementation
         alarmManager = (AlarmManager)(this.getSystemService( Context.ALARM_SERVICE ));
-        Intent intent = new Intent(this,alarmmanager.class);
+        Intent intent = new Intent(this, alarmmanager.class);
 
         pendingIntent = PendingIntent.getBroadcast(this, 12, intent, 0);
 
