@@ -16,7 +16,7 @@
             android:id="@+id/tvEventPal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="18dp"
             android:layout_marginTop="@dimen/grid_3x"
             android:fontFamily="sans-serif"
             android:text="Team Finder"
@@ -40,44 +40,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cvPoster" />
 
-        <!--        <TextView
-                    android:id="@+id/tvFeatured"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/grid_4x"
-                    android:fontFamily="sans-serif"
-                    android:text="Featured"
-                    android:layout_marginTop="@dimen/grid_4x"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        =======
-                <TextView
-                    android:id="@+id/tvFeatured"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="24dp"
-                    android:fontFamily="sans-serif"
-                    android:text="Featured"
-                    android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
-        >>>>>>> a9a92c82b714edba99d47f7e300ca82879dde95f
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/cvPoster" />
-
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cvFeatured"
-                    android:layout_width="0dp"
-                    android:layout_height="200dp"
-                    android:layout_marginTop="@dimen/grid_3x"
-                    android:layout_marginStart="@dimen/grid_4x"
-                    android:layout_marginEnd="@dimen/grid_4x"
-                    app:cardCornerRadius="10dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvFeatured"/>-->
-
         <TextView
             android:id="@+id/tvViewAllUpcomingEvents"
             android:layout_width="wrap_content"
@@ -94,10 +56,10 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cvPoster"
             android:layout_width="0dp"
-            android:layout_height="350dp"
-            android:layout_marginStart="@dimen/grid_4x"
+            android:layout_height="250dp"
+            android:layout_marginStart="18dp"
             android:layout_marginTop="@dimen/grid_3x"
-            android:layout_marginEnd="@dimen/grid_4x"
+            android:layout_marginEnd="@dimen/grid_3x"
             app:cardCornerRadius="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -114,7 +76,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textAllCaps="false"
                 android:alpha="0.9"
-                android:textColor="@color/black" />
+                android:textColor="#33B5E5" />
 
             <ImageView
                 android:id="@+id/cvPosterImage"
@@ -129,10 +91,11 @@
             android:id="@+id/unpcomingEventsRecyclerView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="4dp"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvUpcomingEvents"
             tools:itemCount="10"
