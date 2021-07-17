@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         long systemtime = SystemClock.elapsedRealtime();
 
-        systemtime += (60*1000);
+        systemtime += 5*(60*1000);
 
         alarmManager.setRepeating(
                 AlarmManager.ELAPSED_REALTIME_WAKEUP,systemtime,
