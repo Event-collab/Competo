@@ -8,22 +8,11 @@ import android.content.Intent;
 import androidx.core.app.NotificationCompat;
 import com.StartupBBSR.competo.Activity.MainActivity;
 import com.StartupBBSR.competo.R;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 public class alarmmanager extends BroadcastReceiver {
 
-    private FirebaseFirestore firestoreDB;
-    private FirebaseAuth firebaseAuth;
-    private Task<DocumentSnapshot> document;
-
     @Override
     public void onReceive(Context context, Intent intent) {
-
-        firestoreDB = FirebaseFirestore.getInstance();
-        firebaseAuth = FirebaseAuth.getInstance();
 
         Intent i = new Intent(context, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
