@@ -29,7 +29,6 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
-
 import com.StartupBBSR.competo.Fragments.FindFragment;
 import com.StartupBBSR.competo.Fragments.HomeFragment;
 import com.StartupBBSR.competo.Fragments.ProfileFragment;
@@ -109,7 +108,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         ///////////////////////////////////////////////////////////////////
 
-
         ///////////////////////////////////////////////////////////////////
         //alarm manager implementation
         alarmManager = (AlarmManager)(this.getSystemService( Context.ALARM_SERVICE ));
@@ -119,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         long systemtime = SystemClock.elapsedRealtime();
 
-        systemtime += 5*(60*1000);
+       // systemtime += 5*(60*1000);
 
         alarmManager.setRepeating(
                 AlarmManager.ELAPSED_REALTIME_WAKEUP,systemtime,
