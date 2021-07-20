@@ -88,7 +88,7 @@ public class alarmmanager extends BroadcastReceiver {
                                                                         Log.d(TAG, "messagenumber data: " + document.getData());
                                                                         String messagenumber = document.getString("messagenumber");
                                                                         Log.d(TAG, "messagenumber1 data: " + value);
-                                                                        if(value >= Integer.parseInt(document.getString("messagenumber")))
+                                                                        if(value > Integer.parseInt(document.getString("messagenumber")))
                                                                         {
                                                                             Log.d(TAG, "success data: " + Integer.parseInt(document.getString("messagenumber")));
 
