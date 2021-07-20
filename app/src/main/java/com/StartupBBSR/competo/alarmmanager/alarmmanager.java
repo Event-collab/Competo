@@ -34,7 +34,7 @@ public class alarmmanager extends BroadcastReceiver {
     private static final String TAG = "data";
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore firestoreDB;
-    static int value;
+    int value = 0;
 
     @Override
     public void onReceive(Context context, Intent intent) {
