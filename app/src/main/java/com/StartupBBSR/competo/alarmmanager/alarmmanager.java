@@ -27,17 +27,17 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.DoubleAdder;
 
 public class alarmmanager extends BroadcastReceiver {
 
     private static final String TAG = "data";
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore firestoreDB;
+    static int value;
 
     @Override
     public void onReceive(Context context, Intent intent) {
-
-        final int[] value = new int[1];
 
         firebaseAuth = FirebaseAuth.getInstance();
         firestoreDB = FirebaseFirestore.getInstance();
@@ -64,17 +64,79 @@ public class alarmmanager extends BroadcastReceiver {
                             {
                                 Log.d(TAG,connections.get(i));
                                 CollectionReference docRef1 = firestoreDB.collection("Chats").document(firebaseAuth.getUid() + connections.get(i)).collection("Messages");
+                                int finalI = i;
                                 docRef1.get()
                                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                             @Override
                                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                                 if (task.isSuccessful()) {
-                                                    value[0] = 0;
                                                     for (QueryDocumentSnapshot document : task.getResult()) {
                                                         Log.d(TAG, document.getId() + " => " + document.getData());
-                                                        value[0]++;
-                                                        Log.d(TAG, String.valueOf(value[0]));
+                                                        value++;
+                                                        Log.d(TAG, String.valueOf(value));
                                                     }
+
+                                                    if(finalI == connectionslast-1)
+                                                    {
+                                                        DocumentReference docRef2 = firestoreDB.collection("messagenumber").document(firebaseAuth.getUid());
+                                                        docRef2.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                            @Override
+                                                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                                if (task.isSuccessful()) {
+                                                                    DocumentSnapshot document = task.getResult();
+                                                                    if (document.exists()) {
+                                                                        Log.d(TAG, "messagenumber data: " + document.getData());
+                                                                        String messagenumber = document.getString("messagenumber");
+                                                                        Log.d(TAG, "messagenumber1 data: " + value);
+                                                                        if(value >= Integer.parseInt(document.getString("messagenumber")))
+                                                                        {
+                                                                            Log.d(TAG, "success data: " + Integer.parseInt(document.getString("messagenumber")));
+
+                                                                            int noti = value - Integer.parseInt(document.getString("messagenumber"));
+
+                                                                            Intent i = new Intent(context, MainActivity.class);
+                                                                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+                                                                            PendingIntent pendingintent = PendingIntent.getActivity(context, 0, i, 0);
+
+                                                                            NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "chatnotification")
+                                                                                    .setAutoCancel(true)
+                                                                                    .setSmallIcon(R.drawable.ic_baseline_settings_24)
+                                                                                    .setContentTitle("New Notification")
+                                                                                    .setContentText("You have " +noti+ " new notifications")
+                                                                                    .setContentIntent(pendingintent)
+                                                                                    .setDefaults(NotificationCompat.DEFAULT_ALL)
+                                                                                    .setPriority(NotificationCompat.PRIORITY_HIGH);
+
+                                                                            NotificationManager notificationmanager = context.getSystemService(NotificationManager.class);
+
+                                                                            notificationmanager.notify(2, builder.build());
+
+                                                                            Map<String, Object> city = new HashMap<>();
+
+                                                                            city.put("messagenumber", String.valueOf(value));
+
+                                                                            DocumentReference docRef3 = firestoreDB.collection("messagenumber").document(firebaseAuth.getUid());
+                                                                            docRef3.set(city);
+                                                                        }
+                                                                    } else {
+                                                                        Log.d(TAG, "No such document");
+
+                                                                        Map<String, Object> city = new HashMap<>();
+
+                                                                        city.put("messagenumber", String.valueOf(value));
+
+                                                                        DocumentReference docRef3 = firestoreDB.collection("messagenumber").document(firebaseAuth.getUid());
+                                                                        docRef3.set(city);
+                                                                    }
+                                                                } else {
+                                                                    Log.d(TAG, "get failed with ", task.getException());
+                                                                }
+                                                            }
+                                                        });
+                                                    }
+
                                                 } else {
                                                     Log.d(TAG, "Error getting documents: ", task.getException());
                                                 }
@@ -100,9 +162,10 @@ public class alarmmanager extends BroadcastReceiver {
                                                 if (task.isSuccessful()) {
                                                     for (QueryDocumentSnapshot document : task.getResult()) {
                                                         Log.d(TAG, document.getId() + " => " + document.getData());
-                                                        value[0]++;
-                                                        Log.d(TAG, String.valueOf(value[0]));
+                                                        value++;
+                                                        Log.d(TAG, String.valueOf(value));
                                                     }
+
                                                 } else {
                                                     Log.d(TAG, "Error getting documents: ", task.getException());
                                                 }
@@ -120,50 +183,6 @@ public class alarmmanager extends BroadcastReceiver {
             }
         });
 
-        DocumentReference docRef2 = firestoreDB.collection("messagenumber").document(firebaseAuth.getUid());
-        docRef2.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        Log.d(TAG, "messagenumber data: " + document.getData());
-                        String messagenumber = document.getString("messagenumber");
-                        Log.d(TAG, "messagenumber1 data: " + messagenumber);
-                    } else {
-                        Log.d(TAG, "No such document");
 
-                        Map<String, Object> city = new HashMap<>();
-
-                        city.put("messagenumber", "0");
-
-                        DocumentReference docRef3 = firestoreDB.collection("messagenumber").document(firebaseAuth.getUid());
-                        docRef3.set(city);
-                    }
-                } else {
-                    Log.d(TAG, "get failed with ", task.getException());
-                }
-            }
-        });
-
-
-        Intent i = new Intent(context, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
-        PendingIntent pendingintent = PendingIntent.getActivity(context, 0, i, 0);
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "chatnotification")
-                .setAutoCancel(true)
-                .setSmallIcon(R.drawable.ic_baseline_settings_24)
-                .setContentTitle("New Notification")
-                .setContentText("You have " + value[0] + " new notifications")
-                .setContentIntent(pendingintent)
-                .setDefaults(NotificationCompat.DEFAULT_ALL)
-                .setPriority(NotificationCompat.PRIORITY_HIGH);
-
-        NotificationManager notificationmanager = context.getSystemService(NotificationManager.class);
-
-        notificationmanager.notify(2, builder.build());
     }
 }
