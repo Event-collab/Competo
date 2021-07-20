@@ -123,7 +123,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 AlarmManager.ELAPSED_REALTIME_WAKEUP,systemtime,
                 AlarmManager.INTERVAL_FIFTEEN_MINUTES, pendingIntent
         );
-        Toast.makeText(this, "alarm set successfully", Toast.LENGTH_SHORT).show();
         ///////////////////////////////////////////////////////////////////
 
 //        Disable night mode
